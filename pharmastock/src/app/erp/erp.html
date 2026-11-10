@@ -1,0 +1,325 @@
+<!-- CABEÇALHO DA PÁGINA -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h4 class="fw-bold mb-1">Integração e Gestão ERP</h4>
+    <small class="text-secondary">
+      <i class="bi bi-circle-fill text-success me-1" style="font-size: 6px;"></i> Status da Sincronização: Monitoramento Ativo
+    </small>
+  </div>
+  <div class="d-flex align-items-center gap-2">
+    <small class="text-secondary">Última verificação: 10:42 AM</small>
+    <button class="btn btn-light btn-sm border d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+      <i class="bi bi-arrow-repeat text-secondary"></i>
+    </button>
+  </div>
+</div>
+
+<!-- CARDS SUPERIORES (3 COLUNAS) -->
+<div class="row g-3 mb-3">
+  
+  <!-- CARD 1: VOLUME DE DADOS -->
+  <div class="col-lg-4">
+    <div class="card border h-100">
+      <div class="card-body p-3 d-flex flex-column justify-content-between">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <i class="bi bi-server text-secondary fs-5"></i>
+          <span class="badge bg-primary-subtle text-primary rounded-pill fw-normal px-2" style="font-size: 11px;">
+            <i class="bi bi-arrow-up text-primary"></i> 12%
+          </span>
+        </div>
+        <div>
+          <small class="text-secondary fw-semibold d-block" style="font-size: 11px;">VOLUME DE DADOS (24H)</small>
+          <div class="d-flex align-items-baseline gap-1 mt-1">
+            <span class="fw-bold fs-4">1.24 GB</span>
+            <small class="text-secondary" style="font-size: 12px;">processados</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2: FATURAMENTO REGISTRADO -->
+  <div class="col-lg-4">
+    <div class="card border h-100">
+      <div class="card-body p-3 d-flex flex-column justify-content-between">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <i class="bi bi-receipt text-secondary fs-5"></i>
+          <span class="badge bg-primary-subtle text-primary rounded-pill fw-normal px-2" style="font-size: 11px;">
+            Integrado
+          </span>
+        </div>
+        <div>
+          <small class="text-secondary fw-semibold d-block" style="font-size: 11px;">FATURAMENTO REGISTRADO</small>
+          <h4 class="fw-bold mb-0 mt-1">R$ 482.150,00</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3: PENDÊNCIAS FISCAIS -->
+  <div class="col-lg-4">
+    <div class="card border h-100">
+      <div class="card-body p-3 d-flex flex-column justify-content-between">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <i class="bi bi-exclamation-triangle text-danger fs-5"></i>
+          <span class="badge bg-danger-subtle text-danger rounded-pill fw-normal px-2" style="font-size: 11px;">
+            Atenção Necessária
+          </span>
+        </div>
+        <div>
+          <small class="text-secondary fw-semibold d-block" style="font-size: 11px;">PENDÊNCIAS FISCAIS (NFE)</small>
+          <div class="d-flex align-items-baseline gap-1 mt-1">
+            <span class="fw-bold fs-4 text-danger">14</span>
+            <small class="text-secondary" style="font-size: 12px;">na fila de reenvio</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CONTEÚDO PRINCIPAL (LAYOUT DE DUAS COLUNAS) -->
+<div class="row g-3">
+
+  <!-- ================= COLUNA ESQUERDA (9 colunas) ================= -->
+  <div class="col-lg-9">
+
+    <!-- FLUXO DE INTEGRAÇÃO EM TEMPO REAL -->
+    <div class="card border mb-3">
+      <div class="card-header bg-white py-3">
+        <h6 class="fw-semibold mb-0">Fluxo de Integração em Tempo Real</h6>
+      </div>
+      <div class="card-body p-3">
+        <div class="bg-light border rounded position-relative" style="height: 150px;">
+          <!-- Linhas de grade simuladas -->
+          <div class="w-100 border-bottom position-absolute" style="top: 33%;"></div>
+          <div class="w-100 border-bottom position-absolute" style="top: 66%;"></div>
+          
+          <!-- Ponto de status no gráfico -->
+          <div class="position-absolute bg-danger rounded-circle shadow-sm" style="width: 8px; height: 8px; top: 60%; right: 35%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGS DE SINCRONIZAÇÃO -->
+    <div class="card border">
+      <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+        <h6 class="fw-semibold mb-0">Logs de Sincronização</h6>
+        <a href="#" class="small text-secondary text-decoration-none">
+          Ver histórico completo <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-sm align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th class="small px-3 py-2">DATA/HORA</th>
+              <th class="small py-2">MÓDULO/DADO</th>
+              <th class="small py-2">ID TRANSAÇÃO</th>
+              <th class="small py-2">STATUS</th>
+              <th class="small py-2 text-end px-3">AÇÃO</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <!-- Linha 1 -->
+            <tr>
+              <td class="px-3 py-3 small text-secondary">Hoje, 10:41:22</td>
+              <td class="small">
+                <i class="bi bi-box-arrow-down text-secondary me-1"></i> Baixa de Estoque
+              </td>
+              <td class="small text-secondary font-monospace">TRX-88921-A</td>
+              <td>
+                <span class="badge bg-primary-subtle text-primary rounded-pill fw-normal px-2">
+                  <i class="bi bi-check-circle me-1"></i> SUCESSO
+                </span>
+              </td>
+              <td class="text-end px-3">
+                <button class="btn btn-sm btn-link text-secondary p-0">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!-- Linha 2 -->
+            <tr>
+              <td class="px-3 py-3 small text-secondary">Hoje, 10:38:05</td>
+              <td class="small">
+                <i class="bi bi-receipt text-secondary me-1"></i> Emissão NFe (Retorno)
+              </td>
+              <td class="small text-secondary font-monospace">NFE-9902-SEFAZ</td>
+              <td>
+                <span class="badge bg-danger-subtle text-danger rounded-pill fw-normal px-2">
+                  <i class="bi bi-x-circle me-1"></i> REJEIÇÃO
+                </span>
+              </td>
+              <td class="text-end px-3">
+                <button class="btn btn-sm btn-link text-secondary p-0">
+                  <i class="bi bi-three-dots-vertical"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!-- Linha 3 -->
+            <tr>
+              <td class="px-3 py-3 small text-secondary">Hoje, 10:15:00</td>
+              <td class="small">
+                <i class="bi bi-currency-dollar text-secondary me-1"></i> Sincronização Financeira
+              </td>
+              <td class="small text-secondary font-monospace">FIN-BATCH-09</td>
+              <td>
+                <span class="badge bg-primary-subtle text-primary rounded-pill fw-normal px-2">
+                  <i class="bi bi-check-circle me-1"></i> SUCESSO
+                </span>
+              </td>
+              <td class="text-end px-3">
+                <button class="btn btn-sm btn-link text-secondary p-0">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!-- Linha 4 -->
+            <tr>
+              <td class="px-3 py-3 small text-secondary">Hoje, 10:43:10</td>
+              <td class="small">
+                <i class="bi bi-truck text-secondary me-1"></i> Lotes Recebidos
+              </td>
+              <td class="small text-secondary font-monospace">IN-445-RCV</td>
+              <td>
+                <span class="badge bg-light text-secondary border rounded-pill fw-normal px-2">
+                  <i class="bi bi-arrow-repeat me-1"></i> PROCESSANDO
+                </span>
+              </td>
+              <td class="text-end px-3">
+                <button class="btn btn-sm btn-link text-secondary p-0">
+                  <i class="bi bi-three-dots-vertical"></i>
+                </button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= COLUNA DIREITA (3 colunas) ================= -->
+  <div class="col-lg-3">
+
+    <!-- SAÚDE DA CONEXÃO -->
+    <div class="card border mb-3">
+      <div class="card-header bg-white py-3">
+        <h6 class="fw-semibold mb-0" style="font-size: 13px; letter-spacing: 0.5px;">SAÚDE DA CONEXÃO</h6>
+      </div>
+      <div class="card-body p-3">
+        
+        <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-server text-secondary"></i>
+            <small class="fw-medium">Servidor WMS Local</small>
+          </div>
+          <i class="bi bi-circle-fill text-primary" style="font-size: 8px;"></i>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-cloud text-secondary"></i>
+            <small class="fw-medium">ERP Cloud (SAP)</small>
+          </div>
+          <i class="bi bi-circle-fill text-primary" style="font-size: 8px;"></i>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-building text-secondary"></i>
+            <small class="fw-medium">Gateway SEFAZ</small>
+          </div>
+          <i class="bi bi-circle-fill text-danger" style="font-size: 8px;"></i>
+        </div>
+
+        <hr class="my-3">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <small class="text-secondary" style="font-size: 12px;">Latência Média:</small>
+          <small class="fw-bold" style="font-size: 12px;">42ms</small>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- AÇÕES RÁPIDAS -->
+    <div class="card border mb-3">
+      <div class="card-header bg-white py-3">
+        <h6 class="fw-semibold mb-0" style="font-size: 13px; letter-spacing: 0.5px;">AÇÕES RÁPIDAS</h6>
+      </div>
+      <div class="card-body p-3">
+        <div class="d-grid gap-2">
+          
+          <button class="btn btn-dark text-start d-flex align-items-center gap-2 py-2">
+            <i class="bi bi-arrow-repeat"></i>
+            <small class="fw-medium">Forçar Sincronização Manual</small>
+          </button>
+
+          <button class="btn btn-light border text-start d-flex align-items-center gap-2 py-2">
+            <i class="bi bi-download text-secondary"></i>
+            <small class="fw-medium">Exportar Logs (JSON/XML)</small>
+          </button>
+
+          <button class="btn btn-light border text-start d-flex align-items-center gap-2 py-2">
+            <i class="bi bi-gear text-secondary"></i>
+            <small class="fw-medium">Configurar Webhooks</small>
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ALERTAS DE SISTEMA -->
+    <div class="card border">
+      <div class="card-header bg-white py-3">
+        <h6 class="fw-semibold mb-0" style="font-size: 13px; letter-spacing: 0.5px;">ALERTAS DE SISTEMA</h6>
+      </div>
+      <div class="card-body p-3">
+        
+        <!-- Alerta 1 -->
+        <div class="mb-3 pb-3 border-bottom">
+          <div class="d-flex align-items-start gap-2 mb-1">
+            <i class="bi bi-exclamation-triangle text-danger mt-0.5"></i>
+            <div>
+              <span class="fw-bold small d-block">Divergência de Estoque</span>
+              <small class="text-secondary" style="font-size: 11px;">
+                Lote #AB-882 apresenta saldo diferente no ERP. WMS: 120cx, ERP: 118cx.
+              </small>
+            </div>
+          </div>
+          <small class="text-secondary ms-4" style="font-size: 10px;">Há 15 min</small>
+        </div>
+
+        <!-- Alerta 2 -->
+        <div class="mb-3">
+          <div class="d-flex align-items-start gap-2 mb-1">
+            <i class="bi bi-exclamation-triangle text-warning-emphasis mt-0.5"></i>
+            <div>
+              <span class="fw-bold small d-block">Timeout na Sefaz</span>
+              <small class="text-secondary" style="font-size: 11px;">
+                Tentativa de autorização de 3 NFes falhou. Retentativa agendada.
+              </small>
+            </div>
+          </div>
+          <small class="text-secondary ms-4" style="font-size: 10px;">Há 45 min</small>
+        </div>
+
+        <button class="btn btn-light border w-100 py-1.5 mt-2">
+          <small class="fw-medium">Limpar Alertas Resolvidos</small>
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

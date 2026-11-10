@@ -1,0 +1,46 @@
+<div class="container-fluid py-3">
+  <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-4">
+    <div><h4 class="fw-bold mb-1">Cadastro de medicamentos e produtos</h4><p class="text-secondary mb-0">Registe os dados de identificação, rastreabilidade e conformidade do produto.</p></div>
+    <span class="badge text-bg-light border">Dados guardados no LocalStorage</span>
+  </div>
+
+  @if (mensagem) { <div class="alert alert-success" role="status"><i class="bi bi-check-circle me-2"></i>{{ mensagem }}</div> }
+  @if (erro) { <div class="alert alert-danger" role="alert"><i class="bi bi-exclamation-triangle me-2"></i>{{ erro }}</div> }
+
+  <form class="card border-0 shadow-sm" (ngSubmit)="guardar()" #formProduto="ngForm">
+    <div class="card-header bg-white py-3"><h6 class="fw-bold mb-0">Identificação do produto</h6></div>
+    <div class="card-body p-4">
+      <div class="row g-3">
+        <div class="col-md-6"><label class="form-label">Nome do medicamento/produto *</label><input class="form-control" name="nome" [(ngModel)]="dados.nome" required placeholder="Ex.: Amoxicilina"></div>
+        <div class="col-md-3"><label class="form-label">Categoria *</label><select class="form-select" name="categoria" [(ngModel)]="dados.categoria" required><option value="">Selecione</option><option>Antibiótico</option><option>Analgésico</option><option>Anti-inflamatório</option><option>Hipertensivo</option><option>Controlado</option><option>Dermatológico</option><option>Outros</option></select></div>
+        <div class="col-md-3"><label class="form-label">Dosagem *</label><input class="form-control" name="dosagem" [(ngModel)]="dados.dosagem" required placeholder="500 mg"></div>
+        <div class="col-md-4"><label class="form-label">Fabricante *</label><input class="form-control" name="fabricante" [(ngModel)]="dados.fabricante" required></div>
+        <div class="col-md-4"><label class="form-label">Fornecedor *</label><input class="form-control" name="fornecedor" [(ngModel)]="dados.fornecedor" required></div>
+        <div class="col-md-4"><label class="form-label">Local de armazenamento *</label><input class="form-control" name="local" [(ngModel)]="dados.localArmazenamento" required placeholder="Prateleira A-02"></div>
+      </div>
+      <hr class="my-4"><h6 class="fw-bold mb-3">Lote e rastreabilidade</h6>
+      <div class="row g-3">
+        <div class="col-md-3"><label class="form-label">Número do lote *</label><input class="form-control" name="lote" [(ngModel)]="dados.lote" required></div>
+        <div class="col-md-3"><label class="form-label">Data de fabrico *</label><input type="date" class="form-control" name="fabricacao" [(ngModel)]="dados.dataFabricacao" required></div>
+        <div class="col-md-3"><label class="form-label">Data de validade *</label><input type="date" class="form-control" name="validade" [(ngModel)]="dados.validade" [min]="estoque.dataMinimaValidade()" required></div>
+        <div class="col-md-3"><label class="form-label">Código de rastreio *</label><input class="form-control" name="rastreio" [(ngModel)]="dados.codigoRastreio" required></div>
+        <div class="col-md-3"><label class="form-label">Quantidade inicial</label><input type="number" class="form-control" name="quantidade" [(ngModel)]="dados.quantidadeInicial" min="0" step="1" required></div>
+        <div class="col-md-3"><label class="form-label">Stock mínimo</label><input type="number" class="form-control" name="minimo" [(ngModel)]="dados.estoqueMinimo" min="0" step="1" required></div>
+        <div class="col-md-3"><label class="form-label">Preço de venda (R$) *</label><input type="number" class="form-control" name="preco" [(ngModel)]="dados.preco" min="0" step="0.01" required></div>
+      </div>
+      <hr class="my-4"><h6 class="fw-bold mb-3">Informações regulatórias</h6>
+      <div class="mb-3"><label class="form-label">Informações regulatórias *</label><textarea class="form-control" rows="3" name="regulatorias" [(ngModel)]="dados.informacoesRegulatorias" required placeholder="Registo, classificação ou observações regulamentares..."></textarea></div>
+      <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="retencao" name="retencao" [(ngModel)]="dados.requerRetencaoReceita"><label class="form-check-label fw-semibold" for="retencao">Medicamento sujeito a retenção de receita</label></div>
+      <div class="form-text mt-1">Quando ativado, a saída do medicamento exige os dados da notificação, do médico, do paciente e do comprador.</div>
+    </div>
+    <div class="card-footer bg-white d-flex justify-content-end gap-2 py-3"><button type="button" class="btn btn-outline-secondary" (click)="limpar()">Limpar</button><button type="submit" class="btn btn-dark" [disabled]="!formProduto.valid"><i class="bi bi-save me-2"></i>Guardar medicamento</button></div>
+  </form>
+
+  <div class="card border-0 shadow-sm mt-4">
+    <div class="card-header bg-white py-3 d-flex justify-content-between"><h6 class="fw-bold mb-0">Medicamentos registados</h6><span class="badge text-bg-secondary">{{ produtos.length }} registo(s)</span></div>
+    @if (produtos.length === 0) { <div class="text-center text-secondary py-5"><i class="bi bi-capsule fs-2 d-block mb-2"></i>Ainda não existem medicamentos registados.</div> }
+    @else { <div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="table-light"><tr><th>Medicamento</th><th>Categoria</th><th>Fabricante</th><th>Lotes</th><th>Stock</th><th>Retenção</th></tr></thead><tbody>
+      @for (p of produtos; track p.id) { <tr><td><strong>{{ p.nome }}</strong><small class="d-block text-secondary">{{ p.dosagem }} · {{ p.codigoRastreio }}</small></td><td>{{ p.categoria }}</td><td>{{ p.fabricante }}</td><td>{{ estoque.getLotesDoProduto(p.id).length }}</td><td>{{ quantidade(p.id) }}</td><td>@if (p.requerRetencaoReceita) { <span class="badge text-bg-warning">Obrigatória</span> } @else { <span class="text-secondary">Não</span> }</td></tr> }
+    </tbody></table></div> }
+  </div>
+</div>

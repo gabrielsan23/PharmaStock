@@ -1,0 +1,55 @@
+<div class="container-fluid py-3">
+  <div class="mb-4"><h4 class="fw-bold mb-1">Registo de movimentações</h4><p class="text-secondary mb-0">Registe entradas e saídas de stock, com validação de quantidade, lote e validade.</p></div>
+  @if (mensagem) { <div class="alert alert-success"><i class="bi bi-check-circle me-2"></i>{{ mensagem }}</div> }
+  @if (erro) { <div class="alert alert-danger" role="alert"><i class="bi bi-shield-exclamation me-2"></i>{{ erro }}</div> }
+  @if (produtos.length === 0) { <div class="alert alert-info">Ainda não existem medicamentos. Registe primeiro um medicamento na página <strong>Medicamentos</strong>.</div> }
+
+  <form class="card border-0 shadow-sm mb-4" (ngSubmit)="registar()" #formMov="ngForm">
+    <div class="card-body p-4">
+      <div class="d-flex justify-content-center mb-4"><div class="btn-group p-1 bg-light rounded">
+        <button type="button" class="btn px-4" [class.btn-success]="tipo === 'entrada'" [class.btn-light]="tipo !== 'entrada'" (click)="escolherTipo('entrada')"><i class="bi bi-box-arrow-in-down me-2"></i>Entrada</button>
+        <button type="button" class="btn px-4" [class.btn-danger]="tipo === 'saida'" [class.btn-light]="tipo !== 'saida'" (click)="escolherTipo('saida')"><i class="bi bi-box-arrow-up me-2"></i>Saída</button>
+      </div></div>
+      <div class="row g-3">
+        <div class="col-md-6"><label class="form-label fw-semibold">Medicamento *</label><select class="form-select" name="produto" [(ngModel)]="produtoId" (ngModelChange)="produtoAlterado()" required><option value="">Selecione o medicamento</option>@for (p of produtos; track p.id) { <option [value]="p.id">{{ p.nome }} — {{ p.dosagem }}</option> }</select></div>
+        <div class="col-md-6"><label class="form-label fw-semibold">Lote *</label><select class="form-select" name="lote" [(ngModel)]="loteId" [disabled]="!produtoId || criarNovoLote || (tipo === 'entrada' && lotes.length === 0)" [required]="!criarNovoLote"><option value="">Selecione o lote</option>@for (l of lotes; track l.id) { <option [value]="l.id">{{ l.numero }} · Disp.: {{ l.quantidade }} · Val.: {{ estoque.formatarData(l.validade) }}</option> }</select>
+          @if (tipo === 'entrada' && produtoId) { <div class="form-check mt-2"><input class="form-check-input" type="checkbox" id="novoLote" name="novoLote" [(ngModel)]="criarNovoLote" (ngModelChange)="loteId = ''"><label class="form-check-label small" for="novoLote">Registar entrada num novo lote</label></div> }
+        </div>
+        @if (criarNovoLote && tipo === 'entrada') {
+          <div class="col-12"><div class="rounded border bg-light p-3"><h6 class="fw-semibold">Dados do novo lote</h6><div class="row g-3">
+            <div class="col-md-3"><label class="form-label">N.º do lote *</label><input class="form-control" name="novoNumero" [(ngModel)]="novoLote.numero" required></div>
+            <div class="col-md-3"><label class="form-label">Fabrico *</label><input type="date" class="form-control" name="novoFab" [(ngModel)]="novoLote.dataFabricacao" required></div>
+            <div class="col-md-3"><label class="form-label">Validade *</label><input type="date" class="form-control" name="novoVal" [(ngModel)]="novoLote.validade" [min]="estoque.dataMinimaValidade()" required></div>
+            <div class="col-md-3"><label class="form-label">Código de rastreio *</label><input class="form-control" name="novoCod" [(ngModel)]="novoLote.codigoRastreio" required></div>
+          </div></div></div>
+        }
+        <div class="col-md-4"><label class="form-label fw-semibold">Quantidade *</label><input type="number" class="form-control" name="quantidade" [(ngModel)]="quantidade" min="1" step="1" required></div>
+        <div class="col-md-4"><label class="form-label fw-semibold">Funcionário responsável *</label><input class="form-control" name="responsavel" [(ngModel)]="responsavel" required></div>
+        @if (tipo === 'entrada') { <div class="col-md-4"><label class="form-label fw-semibold">Número da NF-e</label><input class="form-control" name="notaFiscal" [(ngModel)]="notaFiscal" placeholder="Opcional; não pode ser repetida"></div> }
+      </div>
+
+      @if (tipo === 'saida' && produtoSelecionado?.requerRetencaoReceita) {
+        <div class="mt-4 p-3 border border-warning rounded bg-warning-subtle">
+          <h6 class="fw-bold"><i class="bi bi-file-earmark-medical me-2"></i>Retenção de receita obrigatória</h6>
+          <p class="small mb-3">Este medicamento não pode ter a saída registada sem os quatro dados da receita.</p>
+          <div class="row g-3">
+            <div class="col-md-3"><label class="form-label">N.º da notificação *</label><input class="form-control" name="notificacao" [(ngModel)]="receita.numeroNotificacao" required></div>
+            <div class="col-md-3"><label class="form-label">CRM do médico *</label><input class="form-control" name="crm" [(ngModel)]="receita.crmMedico" required></div>
+            <div class="col-md-3"><label class="form-label">Nome do paciente *</label><input class="form-control" name="paciente" [(ngModel)]="receita.nomePaciente" required></div>
+            <div class="col-md-3"><label class="form-label">Nome do comprador *</label><input class="form-control" name="comprador" [(ngModel)]="receita.nomeComprador" required></div>
+          </div>
+        </div>
+      }
+      @if (tipo === 'saida' && loteSelecionado && estoque.getStatusValidade(loteSelecionado.validade) === 'Vencido') { <div class="alert alert-danger mt-3 mb-0"><strong><i class="bi bi-lock-fill me-1"></i>Saída bloqueada.</strong> O lote selecionado está vencido. Não é possível contornar esta restrição.</div> }
+      @if (loteSelecionado && tipo === 'saida' && loteSelecionado.quantidade === 0) { <div class="alert alert-warning mt-3 mb-0">O lote selecionado não tem unidades disponíveis.</div> }
+    </div>
+    <div class="card-footer bg-white d-flex flex-wrap justify-content-between align-items-center py-3"><small class="text-secondary">Data e hora são registadas automaticamente.</small><button type="submit" class="btn" [class.btn-success]="tipo === 'entrada'" [class.btn-danger]="tipo === 'saida'" [disabled]="!formMov.valid || !produtoId || (!loteId && !(criarNovoLote && tipo === 'entrada')) || (tipo === 'saida' && loteSelecionado && estoque.getStatusValidade(loteSelecionado.validade) === 'Vencido')"><i class="bi bi-check2-circle me-2"></i>Confirmar {{ tipo === 'entrada' ? 'entrada' : 'saída' }}</button></div>
+  </form>
+
+  <div class="card border-0 shadow-sm"><div class="card-header bg-white py-3"><h6 class="fw-bold mb-0"><i class="bi bi-clock-history me-2"></i>Histórico de movimentações</h6></div>
+    @if (historico.length === 0) { <div class="text-center text-secondary py-5">Ainda não existem movimentações registadas.</div> }
+    @else { <div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="table-light"><tr><th>Data e hora</th><th>Medicamento</th><th>Lote</th><th>Tipo</th><th>Quantidade</th><th>Responsável</th><th>Registo</th></tr></thead><tbody>
+      @for (m of historico; track m.id) { <tr><td class="small">{{ dataHora(m.dataHora) }}</td><td>{{ m.produtoNome }}</td><td>{{ m.loteNumero }}</td><td><span class="badge" [class.text-bg-success]="m.tipo === 'entrada'" [class.text-bg-danger]="m.tipo === 'saida'">{{ m.tipo === 'entrada' ? 'Entrada' : 'Saída' }}</span></td><td class="fw-semibold">{{ m.quantidade }}</td><td>{{ m.responsavel }}</td><td>@if (m.receita) { <span class="badge text-bg-warning">Receita retida</span> } @else if (m.notaFiscal) { <span class="small">NF-e {{ m.notaFiscal }}</span> } @else { <span class="text-secondary">—</span> }</td></tr> }
+    </tbody></table></div> }
+  </div>
+</div>

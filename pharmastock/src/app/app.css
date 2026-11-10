@@ -1,0 +1,43 @@
+/* Estilização da Sidebar */
+.sidebar {
+  width: 230px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #e9ecef;
+}
+
+/* Logo */
+.logo-box {
+  width: 36px;
+  height: 36px;
+  background-color: #000;
+  border-radius: 6px;
+}
+
+/* Links do Menu */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  color: #495057;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.sidebar-link i {
+  font-size: 1.1rem;
+}
+
+.sidebar-link:hover {
+  background-color: #e9ecef;
+  color: #212529;
+}
+
+/* Item Ativo (Dashboard) */
+.sidebar-link.active {
+  background-color: #e9ecef;
+  color: #212529;
+  font-weight: 600;
+}

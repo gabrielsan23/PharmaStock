@@ -1,0 +1,292 @@
+<div class="row g-3">
+
+  <!-- ================= COLUNA ESQUERDA (9 colunas) ================= -->
+  <div class="col-lg-9">
+
+    <!-- CABEÇALHO E AÇÃO -->
+    <div class="d-flex justify-content-between align-items-start mb-3">
+      <div>
+        <h4 class="fw-bold mb-1">Gestão de Reposição</h4>
+        <small class="text-secondary">
+          Gerencie estoques críticos e gere ordens de compra inteligentemente.
+        </small>
+      </div>
+      <button class="btn btn-dark btn-sm px-3 py-2 text-nowrap">
+        <i class="bi bi-cart-plus me-1"></i> Gerar Ordem de Compra
+      </button>
+    </div>
+
+    <!-- BARRA DE FILTROS E BUSCA -->
+    <div class="card border mb-3">
+      <div class="card-body p-3">
+        <div class="row g-2 align-items-center">
+          
+          <!-- Input de Busca -->
+          <div class="col-md-5">
+            <div class="input-group input-group-sm">
+              <span class="input-group-text bg-white text-secondary">
+                <i class="bi bi-search"></i>
+              </span>
+              <input type="text" class="form-control" placeholder="Buscar Produto, Lote...">
+            </div>
+          </div>
+
+          <!-- Filtro Categoria -->
+          <div class="col-md-3">
+            <select class="form-select form-select-sm">
+              <option selected>Categoria</option>
+              <option>Medicamentos</option>
+              <option>Insumos</option>
+              <option>Equipamentos</option>
+            </select>
+          </div>
+
+          <!-- Filtro Status -->
+          <div class="col-md-2">
+            <select class="form-select form-select-sm">
+              <option selected>Status</option>
+              <option>Crítico</option>
+              <option>Abaixo Mín.</option>
+              <option>Em Trânsito</option>
+            </select>
+          </div>
+
+          <!-- Botão Mais Filtros -->
+          <div class="col-md-2">
+            <button class="btn btn-light btn-sm border w-100 text-nowrap">
+              <i class="bi bi-sliders me-1"></i> Mais Filtros
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TABELA DE REPOSIÇÃO -->
+    <div class="card border">
+      <div class="table-responsive">
+        <table class="table table-hover table-sm align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th class="small px-3 py-2">Medicamento <i class="bi bi-arrow-down small"></i></th>
+              <th class="small py-2 text-center">Estoque Atual</th>
+              <th class="small py-2 text-center">Estoque Ideal</th>
+              <th class="small py-2 text-center">Status</th>
+              <th class="small py-2 text-end">Qtd. Sugerida</th>
+              <th class="small py-2 text-end px-3">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <!-- Linha 1 -->
+            <tr>
+              <td class="px-3 py-3">
+                <div class="d-flex align-items-center gap-2">
+                  <div class="bg-danger-subtle text-danger rounded p-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="bi bi-capsule"></i>
+                  </div>
+                  <div>
+                    <span class="fw-semibold small d-block">Amoxicilina 500mg</span>
+                    <small class="text-secondary" style="font-size: 11px;">SKU: MED-AMX-001</small>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center small fw-bold text-danger">120 cx</td>
+              <td class="text-center small text-secondary">500 cx</td>
+              <td class="text-center">
+                <span class="badge bg-danger-subtle text-danger rounded-pill fw-normal px-2">
+                  <i class="bi bi-circle-fill me-1" style="font-size: 6px;"></i> CRÍTICO
+                </span>
+              </td>
+              <td class="text-end small fw-bold">380 cx</td>
+              <td class="text-end px-3"></td>
+            </tr>
+
+            <!-- Linha 2 -->
+            <tr>
+              <td class="px-3 py-3">
+                <div class="d-flex align-items-center gap-2">
+                  <div class="bg-warning-subtle text-warning-emphasis rounded p-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="bi bi-capsule"></i>
+                  </div>
+                  <div>
+                    <span class="fw-semibold small d-block">Dipirona Sódica 1g</span>
+                    <small class="text-secondary" style="font-size: 11px;">SKU: MED-DIP-002</small>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center small text-secondary">850 fr</td>
+              <td class="text-center small text-secondary">1200 fr</td>
+              <td class="text-center">
+                <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill fw-normal px-2">
+                  <i class="bi bi-circle-fill me-1" style="font-size: 6px;"></i> ABAIXO MÍN.
+                </span>
+              </td>
+              <td class="text-end small fw-bold">350 fr</td>
+              <td class="text-end px-3"></td>
+            </tr>
+
+            <!-- Linha 3 -->
+            <tr>
+              <td class="px-3 py-3">
+                <div class="d-flex align-items-center gap-2">
+                  <div class="bg-primary-subtle text-primary rounded p-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="bi bi-capsule"></i>
+                  </div>
+                  <div>
+                    <span class="fw-semibold small d-block">Omeprazol 20mg</span>
+                    <small class="text-secondary" style="font-size: 11px;">SKU: MED-OMP-005</small>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center small text-secondary">450 cx</td>
+              <td class="text-center small text-secondary">800 cx</td>
+              <td class="text-center">
+                <span class="badge bg-primary-subtle text-primary rounded-pill fw-normal px-2">
+                  <i class="bi bi-truck me-1"></i> EM TRÂNSITO
+                </span>
+              </td>
+              <td class="text-end small text-secondary">-</td>
+              <td class="text-end px-3"></td>
+            </tr>
+
+            <!-- Linha 4 -->
+            <tr>
+              <td class="px-3 py-3">
+                <div class="d-flex align-items-center gap-2">
+                  <div class="bg-danger-subtle text-danger rounded p-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="bi bi-hospital"></i>
+                  </div>
+                  <div>
+                    <span class="fw-semibold small d-block">Soro Fisiológico 0.9%</span>
+                    <small class="text-secondary" style="font-size: 11px;">SKU: MED-SOR-012</small>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center small fw-bold text-danger">50 bg</td>
+              <td class="text-center small text-secondary">1000 bg</td>
+              <td class="text-center">
+                <span class="badge bg-danger-subtle text-danger rounded-pill fw-normal px-2">
+                  <i class="bi bi-circle-fill me-1" style="font-size: 6px;"></i> CRÍTICO
+                </span>
+              </td>
+              <td class="text-end small fw-bold">950 bg</td>
+              <td class="text-end px-3"></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- RODAPÉ DA TABELA / PAGINAÇÃO -->
+      <div class="card-footer bg-white d-flex justify-content-between align-items-center py-3">
+        <small class="text-secondary">
+          Mostrando 1 a 4 de 24 itens críticos
+        </small>
+        
+        <div class="d-flex align-items-center gap-1">
+          <button class="btn btn-sm btn-link text-secondary p-1 text-decoration-none border-0" disabled>
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <button class="btn btn-sm btn-dark px-2 py-1 rounded small fw-bold">1</button>
+          <button class="btn btn-sm btn-light text-dark px-2 py-1 rounded small border-0">2</button>
+          <button class="btn btn-sm btn-light text-dark px-2 py-1 rounded small border-0">3</button>
+          <button class="btn btn-sm btn-link text-dark p-1 text-decoration-none border-0">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= COLUNA DIREITA (3 colunas) ================= -->
+  <div class="col-lg-3">
+
+    <!-- PAINEL DE REPOSIÇÃO -->
+    <div class="card border mb-3">
+      <div class="card-header bg-white py-3">
+        <h6 class="fw-semibold mb-0">
+          <i class="bi bi-activity text-secondary me-2"></i>Painel de Reposição
+        </h6>
+      </div>
+      <div class="card-body p-3">
+        
+        <!-- CARDS SUPERIORES EM LADO A LADO -->
+        <div class="row g-2 mb-3">
+          <div class="col-6">
+            <div class="border border-danger-subtle rounded p-2 h-100" style="background-color: #fff5f5;">
+              <small class="text-secondary d-block" style="font-size: 11px;">Itens Críticos</small>
+              <span class="fw-bold fs-4 text-danger">24</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="border border-primary-subtle rounded p-2 h-100" style="background-color: #e8f0fe;">
+              <small class="text-secondary d-block" style="font-size: 11px;">Ordens Pendentes</small>
+              <span class="fw-bold fs-4 text-dark">8</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- VALOR ESTIMADO REPOSIÇÃO -->
+        <div class="border rounded p-2 bg-light mb-3">
+          <small class="text-secondary d-block" style="font-size: 11px;">Valor Estimado Reposição</small>
+          <h5 class="fw-bold mb-0 mt-1">R$ 142.500,00</h5>
+        </div>
+
+        <!-- BOTÕES DE AÇÃO -->
+        <div class="d-grid gap-2">
+          <button class="btn btn-dark border text-center py-2">
+            <small class="fw-medium"><i class="bi bi-stars me-1"></i> Sugerir Quantidades via IA</small>
+          </button>
+          <button class="btn btn-light border text-center py-2">
+            <small class="fw-medium"><i class="bi bi-download me-1"></i> Exportar Lista de Compras</small>
+          </button>
+        </div>
+
+        <div class="text-center mt-3">
+          <a href="#" class="small text-secondary text-decoration-none">
+            Histórico de Pedidos <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FORNECEDOR EM DESTAQUE -->
+    <div class="card border">
+      <div class="card-body p-3">
+        <small class="text-secondary fw-semibold d-block mb-3" style="font-size: 11px; letter-spacing: 0.5px;">
+          FORNECEDOR EM DESTAQUE
+        </small>
+
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <div class="bg-light border rounded p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+            <i class="bi bi-building fs-5 text-secondary"></i>
+          </div>
+          <div>
+            <span class="fw-bold small d-block">MediCorp Supply Ltda.</span>
+            <small class="text-secondary d-block" style="font-size: 11px;">Atende 45% da demanda crítica</small>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mb-1">
+          <small class="text-secondary" style="font-size: 12px;">Prazo Médio Entrega:</small>
+          <small class="fw-bold" style="font-size: 12px;">3 dias</small>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+          <small class="text-secondary" style="font-size: 12px;">Performance Prazos:</small>
+          <small class="fw-bold" style="font-size: 12px;">98.5%</small>
+        </div>
+
+        <button class="btn btn-light border w-100 py-1.5">
+          <small class="fw-medium">Ver Catálogo e Cotar</small>
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
