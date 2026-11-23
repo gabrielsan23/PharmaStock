@@ -1,7 +1,7 @@
 # PharmaStock
 
 > Sistema de Gerenciamento de Armazém e Recursos Empresariais (WMS/ERP) focado no controle rigoroso de estoque farmacêutico, lotes, validades e conformidade regulatória.
-
+## projeto java link: https://onlinegdb.com/lmwcHegaa
 ---
 
 ## 🚀 Sobre o Projeto
